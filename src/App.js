@@ -1,16 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const App = props => {
-  // state = {name: 'yokokura', price: 1000} というobjectを定義している
   const [state, setState] = useState(props)
-
-  // state.nameやstate.priceと書くのが冗長なため、stateのプロパティを分割代入する
   const { name, price } = state
+
+  // useEffectは「renderされた後」に実行される
+  useEffect(() => {
+    console.log('componentDidMountとcomponentDidUpdateの挙動')
+  })
+
+  // 第二引数に[]を指定すると「初回のrenderされた後のみ」に実行される
+  useEffect(() => {
+    console.log('componentDidMountの挙動')
+  }, [])
+
+  // 第二引数の配列の中にパラメータを指定すると「特定のパラメータがrender(描画または変更)された時のみ」に実行される
+  useEffect(() => {
+    console.log('nameが描画された、または変更された時のみ実行される')
+  }, [name])
 
   return (
     <>
       <p>現在の{name}さんの所持金は{price}円です。</p>
-      {/* setStateの第一引数にstateのコピー、第二引数に変更したいプロパティと値をセットしている */}
       <button onClick={() => setState({ ...state, price: price + 100 })}>+100</button>
       <button onClick={() => setState({ ...state, price: price - 100 })}>-100</button>
       <button onClick={() => setState(props)}>Reset</button>
@@ -19,7 +30,6 @@ const App = props => {
   )
 }
 
-// defaultPropsの値(下記のケースはnameとpriceを持ったobject)をpropsに渡すことができる
 App.defaultProps = {
   name: '',
   price: 1000
