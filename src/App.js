@@ -1,28 +1,27 @@
 import React, { useState } from 'react'
 
 const App = props => {
-  const [name, setName] = useState(props.name)
-  const [price, setPrice] = useState(props.price)
+  // state = {name: 'yokokura', price: 1000} というobjectを定義している
+  const [state, setState] = useState(props)
 
-  const reset = () => {
-    setName(props.name)
-    setPrice(props.price)
-  }
+  // state.nameやstate.priceと書くのが冗長なため、stateのプロパティを分割代入する
+  const { name, price } = state
 
   return (
     <>
       <p>現在の{name}さんの所持金は{price}円です。</p>
-      <button onClick={() => setPrice(price + 100)}>+100</button>
-      <button onClick={() => setPrice(price - 100)}>-100</button>
-      <button onClick={reset}>Reset</button>
-      <input value={name} onChange={e => setName(e.target.value)} />
+      {/* setStateの第一引数にstateのコピー、第二引数に変更したいプロパティと値をセットしている */}
+      <button onClick={() => setState({ ...state, price: price + 100 })}>+100</button>
+      <button onClick={() => setState({ ...state, price: price - 100 })}>-100</button>
+      <button onClick={() => setState(props)}>Reset</button>
+      <input value={name} onChange={e => setState({ ...state, name: e.target.value })} />
     </>
   )
 }
 
-// defaultPropsの値をpropsを使って値を渡すことができる
+// defaultPropsの値(下記のケースはnameとpriceを持ったobject)をpropsに渡すことができる
 App.defaultProps = {
-  name: 'yokokura',
+  name: '',
   price: 1000
 }
 
