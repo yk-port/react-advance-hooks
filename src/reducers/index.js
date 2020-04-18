@@ -10,7 +10,8 @@ const events = (state = [], action) => {
       // 第一引数に現在のstateをコピー、第二引数に追加したい内容を指定
       return [...state, { id, ...event }]
     case 'DELETE_EVENT':
-      return state
+      // stateはobject型のevent情報が配列で格納されている。actionには選択されたid情報が含まれている
+      return state.filter(event => event.id !== action.id)
     case 'DELETE_ALL_EVENT':
       return []
     default:
