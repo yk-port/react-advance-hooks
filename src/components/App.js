@@ -27,6 +27,12 @@ const App = () => {
     setBody('')
   }
 
+  const deleteAllEvent = e => {
+    e.preventDefault()
+    const result = window.confirm('全てのイベントを削除してよろしいですか？')
+    if (result) dispatch({ type: 'DELETE_ALL_EVENT' })
+  }
+
   return (
     <div className="container-fluid">
       <h4>イベント作成フォーム</h4>
@@ -41,8 +47,9 @@ const App = () => {
           <textarea className="form-control" id="formEventBody" value={body} onChange={e => setBody(e.target.value)}  />
         </div>
 
-        <button className="btn btn-primary" onClick={addEvent}>イベントを作成する</button>
-        <button className="btn btn-danger">全てのイベントを削除する</button>
+        {/* 活性・非活性の処理 真偽値の返り値を取得しdisabledに渡す */}
+        <button className="btn btn-primary" onClick={addEvent} disabled={title === '' || body === ''}>イベントを作成する</button>
+        <button className="btn btn-danger" onClick={deleteAllEvent} disabled={state.length === 0}>全てのイベントを削除する</button>
       </form>
 
       <h4>イベント一覧</h4>
