@@ -22,7 +22,7 @@ const EventForm = () => {
     })
     dispatch({
       type: ADD_OPERATION_LOG,
-      description: `${title}イベント作成しました`,
+      description: `イベント名：${title}を作成しました`,
       operatedAdd: timeCurrentIso8601()
     })
     setTitle('')

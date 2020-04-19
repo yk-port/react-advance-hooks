@@ -10,12 +10,12 @@ const Event = ({ event }) => {
   const { dispatch } = useContext(AppContext)
   const { id, title, body } = event
   const handleClickDeleteEvent = () => {
-    const result = window.confirm(`${title}を削除してもよろしいですか？`)
+    const result = window.confirm(`イベント名：${title}を削除してもよろしいですか？`)
     if (result) {
       dispatch({ type: DELETE_EVENT, id })
       dispatch({
         type: ADD_OPERATION_LOG,
-        description: `${title}イベントを削除しました`,
+        description: `イベント名：${title}を削除しました`,
         operatedAdd: timeCurrentIso8601()
       })
     }
