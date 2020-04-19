@@ -6,6 +6,7 @@ import {
 const operationLogs = (state = [], action) => {
   switch (action.type) {
     case ADD_OPERATION_LOG:
+      console.log(action)
       // actionから受け取ったデータをobject型で作る
       const operationLog = {
         description: action.description,
