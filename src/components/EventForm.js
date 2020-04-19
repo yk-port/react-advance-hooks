@@ -22,7 +22,7 @@ const EventForm = () => {
     })
     dispatch({
       type: ADD_OPERATION_LOG,
-      descrition: 'イベント作成しました',
+      description: `${title}イベント作成しました`,
       operatedAdd: timeCurrentIso8601()
     })
     setTitle('')
@@ -36,7 +36,7 @@ const EventForm = () => {
       dispatch({ type: DELETE_ALL_EVENT })
       dispatch({
         type: ADD_OPERATION_LOG,
-        descrition: '全てのイベントを削除しました',
+        description: '全てのイベントを削除しました',
         operatedAdd: timeCurrentIso8601()
       })
     }
