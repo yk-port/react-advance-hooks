@@ -10,8 +10,9 @@ const App = () => {
   // reducerを使うとstate(状態)とdispatchという関数が返ってくる
   // useReducerの第一引数にはreducerを渡す(これは決まっている)
   // 第二引数にはデフォルトの状態を指定する→今回eventの状態を配列で管理していきたいので[]と記述している
+  // state...reducerで処理が実行され、その返り値(return)の内容がstateに入る
   // dispatch…状態を変更(イベント発生)したタイミングでdispatch関数を使う。dispatchの引数にactionを渡す。
-  // actionにはtypeという属性を付与して、「何のイベントなのか」を管理する
+  // object型のactionにはtypeという属性を付与して、「何のイベントなのか」を管理する
   const [state, dispatch] = useReducer(reducer, [])
 
   const addEvent = e => {
